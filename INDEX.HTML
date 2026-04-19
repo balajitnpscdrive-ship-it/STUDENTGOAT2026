@@ -1,3 +1,9 @@
+
+student.html
+c:/Users/balaj/.gemini/antigravity/playground/zonal-telescope
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +14,11 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://unpkg.com/html5-qrcode"></script>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="goats_icon.png">
+    <meta name="theme-color" content="#020617">
     <style>
         :root { 
             --bg: #020617; 
@@ -171,7 +182,7 @@
         </div>
     </div>
     <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbxQgYBNbVGBI47Hj53mR8jNOFJGBQeHKlA2JscoQFgv8L4jDDpw-tk02lCb-ixG9TH7/exec";
+        const API_URL = "https://script.google.com/macros/s/AKfycbxwWiJ0MwqG9Y_ZYq-hdHvF11gwO3-n-9UnGEVFcywk6rCj_WfJE46Nm2dMojZMiMibYA/exec";
         const CAT_C = {'Activities':'#bf5af2','Discipline':'#32d74b','Academics':'#0a84ff','Sports':'#ff9f0a','Special':'#ff375f'};
         let appData={}, scanner=null, audioCtx=null, lastSyncTime=0;
         const call=(p)=>fetch(API_URL,{method:"POST",body:JSON.stringify(p)}).then(res=>res.json());
@@ -335,6 +346,11 @@
            }).join('');
         }
         init();
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch(() => {});
+            });
+        }
     </script>
 </body>
 </html>
