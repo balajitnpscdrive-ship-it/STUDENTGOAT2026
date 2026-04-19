@@ -1,0 +1,23 @@
+const CACHE_NAME = 'goats-cache-v1';
+const urlsToCache = [
+  './student.html',
+  './manifest.json',
+  './goats_icon.png'
+];
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(urlsToCache))
+  );
+});
+self.addEventListener('fetch', event => {
+  // Only cache static assets, always fetch API from network
+  if (event.request.url.includes('script.google.com')) {
+    event.respondWith(fetch(event.request));
+  } else {
+    event.respondWith(
+      caches.match(event.request)
+        .then(response => response || fetch(event.request))
+    );
+  }
+});
