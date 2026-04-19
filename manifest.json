@@ -2,7 +2,7 @@
   "name": "G.O.A.T.S Hub",
   "short_name": "GOATS",
   "description": "Elite Student Achievement Dashboard",
-  "start_url": "./student.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#020617",
   "theme_color": "#00f2fe",
