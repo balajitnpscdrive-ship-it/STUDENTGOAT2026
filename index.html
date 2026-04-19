@@ -82,6 +82,7 @@
         <img id="sp-img" class="splash-img">
         <h1 style="font-family:'Bebas Neue'; letter-spacing:10px; margin-top:30px; font-size:45px; text-align:center;">INITIALIZING<br>PLATINUM HUB</h1>
         <p id="sp-status" style="font-size:10px; font-weight:900; opacity:0.4; letter-spacing:4px; margin-top:20px;">CALIBRATING NEURAL LINK...</p>
+        <div id="debug-log" style="font-size:8px; color:#ff375f; opacity:0.6; margin-top:20px; font-family:monospace; max-width:80%; text-align:center;"></div>
         <button id="sp-retry" style="display:none; margin-top:30px; background:transparent; border:1px solid #fff; color:#fff; padding:10px 20px; border-radius:10px; font-weight:900; font-size:10px; letter-spacing:2px;" onclick="location.reload()">FORCE RE-LINK</button>
     </div>
     <div id="ticker" style="display:none;"><div class="ticker-move">🏆 BATTLE ARENA LIVE • RANK STATUS: ELITE • PERSISTENCE IS POWER • SYNCED WITH MASTER GRID</div></div>
@@ -219,6 +220,7 @@
            } catch(e) { 
                clearTimeout(timeout);
                document.getElementById('sp-status').innerText="SYNC FAILED. CHECK INTERNET."; 
+               document.getElementById('debug-log').innerText = e.toString();
                document.getElementById('sp-retry').style.display = "block";
            }
         }
@@ -314,7 +316,7 @@
            let rnk="ROOKIE",nxt=500; if(res.total>=500){rnk="LEGEND";nxt=1000;} else if(res.total>=100){rnk="GOLD TIER";nxt=500;}
            document.getElementById('r-text').innerText=rnk; 
            document.getElementById('r-fill').style.width=(res.total/nxt*100)+"%"; 
-           document.getElementById('r-fill').style.backgroundColor=hC?hC.color:var(--accent);
+           document.getElementById('r-fill').style.backgroundColor=hC?hC.color:'var(--accent)';
            document.getElementById('r-hint').innerText=(res.total<nxt)?`${nxt-res.total} PTS TO REACH NEXT TIER`:"MAXIMUM RANK ATTAINED";
            
            const dr=res.studentLeaderboard.findIndex(x=>x[0].trim().toUpperCase()===res.profile.name.trim().toUpperCase())+1;
